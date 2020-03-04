@@ -1,4 +1,4 @@
-class Discount_Curve_Provider():
+class DiscountCurveProvider():
 
     def bootstrap(self):
         print('not implemented yet')
@@ -7,6 +7,6 @@ class Discount_Curve_Provider():
         print('not implemented yet')
 
 if __name__ == "__main__":
-    dcp = Discount_Curve_Provider()
+    dcp = DiscountCurveProvider()
 
     print('Discount Curve')
