@@ -1,9 +1,18 @@
 class NumberCruncher():
-    
-    def __init__(self, age, sex, payment_amt):
+
+    def __init__(self, age, sex, payment):
         self.age = age
         self.sex = sex
-        self.payment_amt = payment_amt 
+        self.payment = payment
+
+    def update_age(self, age):
+        self.age = age
+    
+    def update_sex(self, sex):
+        self.sex = sex
+
+    def update_payment(self, payment):
+        self.payment = payment
 
     def actuarial_PV(self):
         return 1000
@@ -15,7 +24,7 @@ class NumberCruncher():
 if __name__ == "__main__":
     age = 50
     sex = 'm'
-    payment_amt = 1000
-    crunch = NumberCruncher(age, sex, payment_amt)
+    payment = 1000
+    crunch = NumberCruncher(age, sex, payment)
 
     print('results')
