@@ -3,6 +3,9 @@ class Mortality_Table_Provider():
         print('not implemented yet')
 
 
+        
+
+
 if __name__ == "__main__":
     mtp = Mortality_Table_Provider()
 

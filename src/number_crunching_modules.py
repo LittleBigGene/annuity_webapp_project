@@ -13,9 +13,9 @@ class NumberCruncher():
 
 
 if __name__ == "__main__":
-    age = 33
-    sex = 'female'
-    payment_amt = [1,1,1,1,1,1,1]
+    age = 50
+    sex = 'm'
+    payment_amt = 1000
     crunch = NumberCruncher(age, sex, payment_amt)
 
     print('results')
