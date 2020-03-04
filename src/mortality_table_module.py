@@ -1,4 +1,4 @@
-class Mortality_Table_Provider():
+class MortalityTableProvider():
     def get_table_from_SOA(self):
         print('not implemented yet')
 
@@ -7,6 +7,6 @@ class Mortality_Table_Provider():
 
 
 if __name__ == "__main__":
-    mtp = Mortality_Table_Provider()
+    mtp = MortalityTableProvider()
 
     print('SOA Mortality Tables')
