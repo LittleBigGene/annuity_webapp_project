@@ -1,9 +1,11 @@
+import numpy as np
 class NumberCruncher():
 
-    def __init__(self, age, sex, payment):
+    def __init__(self, age, sex, payment, mortality):
         self.age = age
         self.sex = sex
         self.payment = payment
+        self.mortality = mortality
 
     def update_age(self, age):
         self.age = age
@@ -14,20 +16,17 @@ class NumberCruncher():
     def update_payment(self, payment):
         self.payment = payment
 
-    def actuarial_PV(self, mortality_rates, discount_rates):
-        for x in range (0, len(mortality_rates)):
-            tpx_array = np.array(tpx(mortality_rates[:x]))
+    def actuarial_PV(self, discount_rates):
+        for x in range (0, len(self.mortality)):
+            tpx = np.prod((1 - np.array(self.mortality)))
+            tpx_array = np.array(tpx[:x] )
         return np.inner(tpx_array, discount_rates)
 
-    def life_expectancy(self, mortality_rates):
-        for x in range (0, len(mortality_rates)):
-            life_array = np.array(tpx(mortality_rates[:x]) * (x + 1))
+    def life_expectancy(self):
+        for x in range (0, len(self.mortality)):
+            tpx = np.prod((1 - np.array(self.mortality)))
+            life_array = np.array(tpx[:x] * (x + 1))
         return sum(life_array)
-
-    def tpx(self, mortality_rates)
-        import numpy as np
-        return np.prod((1 - np.array(morality_rates)))
-
 
 if __name__ == "__main__":
     age = 50
