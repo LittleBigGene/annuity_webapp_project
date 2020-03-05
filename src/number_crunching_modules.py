@@ -1,7 +1,10 @@
 import numpy as np
+from mortality_table_module import MortalityTableProvider
+from discount_curve_module import DiscountCurveProvider
+from swap_rate_module import SwapRateProvider
 class NumberCruncher():
 
-    def __init__(self, age, sex, payment, mortality):
+    def __init__(self, age, sex, payment, mortality, discount):
         self.age = age
         self.sex = sex
         self.payment = payment

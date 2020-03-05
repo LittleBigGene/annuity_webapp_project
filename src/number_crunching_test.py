@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 from number_crunching_modules import NumberCruncher
-
+from discount_curve_module import DiscountCurveProvider
 class NumberCruncher_test(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
