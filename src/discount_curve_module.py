@@ -5,7 +5,7 @@ class DiscountCurveProvider():
     def __init__(self, tenors, parcurve, extrap_yrs = None):
         self._tenors = tenors
         self._parcurve = parcurve
-        self._extrap_yrs = None
+        self._extrap_yrs = extrap_yrs
 
     def bootstrap(self):
         tenors = tenors, parcurve = np.asarray(self._tenors), np.asarray(self._parcurve)
@@ -37,6 +37,4 @@ class DiscountCurveProvider():
 
 
 if __name__ == "__main__":
-    dcp = DiscountCurveProvider()
-
     print('Discount Curve')

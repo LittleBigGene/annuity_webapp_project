@@ -5,7 +5,7 @@ class NumberCruncher():
         self.age = age
         self.sex = sex
         self.payment = payment
-        self.mortality = mortality
+        self.mortality = np.asarray(mortality)
 
     def update_age(self, age):
         self.age = age
@@ -17,21 +17,18 @@ class NumberCruncher():
         self.payment = payment
 
     def actuarial_PV(self, discount_rates):
-        for x in range (0, len(self.mortality)):
-            tpx = np.prod((1 - np.array(self.mortality)))
-            tpx_array = np.array(tpx[:x] )
-        return np.inner(tpx_array, discount_rates)
+        qx_fromage = self.mortality[self.age:]
+        tpx = np.cumprod(1 - qx_fromage)
+        dfs = np.asarray(discount_rates[:len(qx_fromage)])
+        return 1000 * (tpx @ dfs)
 
     def life_expectancy(self):
-        for x in range (0, len(self.mortality)):
-            tpx = np.prod((1 - np.array(self.mortality)))
-            life_array = np.array(tpx[:x] * (x + 1))
-        return sum(life_array)
+        qx_fromage = self.mortality[self.age:]
+        tpx = np.cumprod(1 - qx_fromage)
+        surv_to_ages = np.arange(self.age, self.age + len(tpx))
+        return qx_fromage[0] * surv_to_ages[0] \
+        + (tpx[:-1] * qx_fromage[1:]) @ surv_to_ages[1:] \
+        + tpx[-1] * 1 * (surv_to_ages[-1] + 1)
 
-if __name__ == "__main__":
-    age = 50
-    sex = 'm'
-    payment = 1000
-    crunch = NumberCruncher(age, sex, payment)
 
-    print('results')
+    
