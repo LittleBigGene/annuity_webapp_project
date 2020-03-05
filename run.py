@@ -1,29 +1,45 @@
 import numpy as np
+import pandas as pd
 from flask import Flask, request, render_template
+from src.discount_curve_module import DiscountCurveProvider
 
 app = Flask(__name__)
 
 def get_params(form_data):
-    dist = form_data.get("dist").lower()
-    mean = float(form_data.get("mean"))
-    var = float(form_data.get("var"))
-    samples = int(form_data.get("samples"))
-    return dist, mean, var, samples
+    try:
+        age = int(form_data.get("age"))
+    except:
+        age = 65
+    try:
+        sex = str(form_data.get("sex"))
+    except:
+        sex = 'm'
+    try:
+        payment = float(form_data.get("payment"))
+    except:
+        payment = 2000
+    return age, sex, payment
 
-@app.route("/random_numbers", methods=["GET", "POST"])
-def random_numbers():
+@app.route("/", methods=["GET", "POST"])
+def annunity_price():
     if request.method == "POST":
-        dist, mean, var, samples = get_params(request.form)
-        dist_func = np.random.normal if dist == "n" else np.random.lognormal
-        rand_num_list = dist_func(mean, var, samples).tolist()
+        age, sex, payment = get_params(request.form)
+        swap = pd.read_csv('./src/swaps.csv')
+        dcp = DiscountCurveProvider(tenors = swap['Tenor'], parcurve = swap['Swap'])
+            
+        try:
+            price = dcp.bootstrap()[0]
+        except:
+            price = 0
+
         return render_template("app.html",
-                               rand_num_list=rand_num_list,
-                               dist=dist,
-                               mean=mean,
-                               var=var,
-                               samples=samples)
+                               age = age,
+                               sex = sex,
+                               payment = payment,
+                               result = price
+                               )
     else:
         return render_template("app.html")
 
-
-app.run(host="localhost", port=5000)
+if __name__=='__main__':
+    app.run(host="localhost", port=5000)
