@@ -2,7 +2,7 @@
 <html lang="en">
     
 <head>
-    <title>Random Number App</title>
+    <title>Annuity Pricer App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
     
@@ -10,44 +10,33 @@
     <div class="container">
         <br>
         <div class="page-header">
-            <h1>Random Number App</h1>
+            <h1>Annuity Pricer App</h1>
         </div>
         <br><br>
         <form method="post">
             <div class="form-group row">
-                <label for="dist" class="col-sm-2">Distribution</label>
-                <select name="dist" id="dist" style="width: 8rem">
-                  <option value="n" {% if dist == "n" %} selected="selected"{% endif %}>Normal</option>
-                  <option value="l" {% if dist == "l" %} selected="selected"{% endif %}>Lognormal</option>
-                </select>
+                <label for="age" class="col-sm-2">Age</label>
+                <input type="text" name="age" id="age"  style="width: 8rem" value={{age}}>
+                
             </div>
             <div class="form-group row">
-                <label for="mean" class="col-sm-2">Mean</label>
-                <input type="text" name="mean" id="mean"  style="width: 8rem" value={{mean}}>
+                <label for="sex" class="col-sm-2">Sex</label>
+                <input type="text" name="sex" id="sex"  style="width: 8rem" value={{sex}}>
             </div>
             <div class="form-group row">
-                <label for="var" class="col-sm-2">Variance</label>
-                <input type="text" name="var" id="var"  style="width: 8rem" value={{var}}>
+                <label for="payment" class="col-sm-2">Payment Amount</label>
+                <input type="text" name="payment" id="payment"  style="width: 8rem" value={{payment}}>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Get Data</button>
+            <button type="submit" class="btn btn-primary">Get Price</button>
         </form>
         <br><br>
-        <div id="plot"></div>
+        <div class="form-group row">
+            <label for="result" class="col-sm-2"></label>
+            <input type="text" name="result" id="result"  style="width: 8rem" value={{result}}>
+        </div>
     </div>
 </body>
 
-<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-{% if rand_num_list is defined %}    
-<script>
-    let data = [{
-      x: {{ rand_num_list | tojson }},
-      type: 'histogram',
-      histnorm: 'probability',
-      opacity: 0.75
-    }];
-    Plotly.newPlot('plot', data, {title: 'Sample Data'});
-</script>
-{% endif %}
     
 </html>

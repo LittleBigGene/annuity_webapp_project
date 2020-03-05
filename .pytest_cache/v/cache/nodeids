@@ -1,3 +1,4 @@
 [
+  "src/discount_curve_test.py::test_DiscountCurveProvider::test_bootstrap",
   "src/number_crunching_test.py::NumberCruncher_test::test_actuarial_PV"
 ]
