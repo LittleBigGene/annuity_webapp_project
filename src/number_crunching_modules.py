@@ -1,5 +1,4 @@
 import numpy as np
-from mortality_table_module import MortalityTableProvider
 from discount_curve_module import DiscountCurveProvider
 from swap_rate_module import SwapRateProvider
 class NumberCruncher():
@@ -33,6 +32,3 @@ class NumberCruncher():
         return qx_fromage[0] * surv_to_ages[0] \
         + (tpx[:-1] * qx_fromage[1:]) @ surv_to_ages[1:] \
         + tpx[-1] * 1 * (surv_to_ages[-1] + 1)
-
-
-    
