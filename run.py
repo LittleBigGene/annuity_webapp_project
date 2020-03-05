@@ -42,7 +42,7 @@ def annunity_price():
                                age = age,
                                sex = sex,
                                payment = payment,
-                               result_annuity = price.round(2),
+                               result_annuity = '{:,}'.format(price.round(2)),
                                result_explife = explife.round(2)
                                )
     else:
