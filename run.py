@@ -34,6 +34,7 @@ def annunity_price():
             qx = mort_tables[sex.upper()].values
             nc = NumberCruncher(age, sex, payment, qx, dcp.bootstrap())   
             price = nc.actuarial_PV()
+            explife = nc.life_expectancy()
         except:
             price = 0
 
@@ -41,7 +42,8 @@ def annunity_price():
                                age = age,
                                sex = sex,
                                payment = payment,
-                               result = price.round(2)
+                               result_annuity = price.round(2),
+                               result_explife = explife.round(2)
                                )
     else:
         return render_template("app.html")
