@@ -31,7 +31,7 @@ def annunity_price():
         try:
             swap = SwapRateProvider().get_swap_from_csv()
             dcp = DiscountCurveProvider(tenors = swap['Tenor'], parcurve = swap['Swap'], extrap_yrs = 90)
-            qx = mort_tables[sex.to_upper()].values
+            qx = mort_tables[sex.upper()].values
             nc = NumberCruncher(age, sex, payment, qx, dcp.bootstrap())   
             price = nc.actuarial_PV()
         except:
@@ -41,7 +41,7 @@ def annunity_price():
                                age = age,
                                sex = sex,
                                payment = payment,
-                               result = price
+                               result = price.round(2)
                                )
     else:
         return render_template("app.html")

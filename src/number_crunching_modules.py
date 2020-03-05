@@ -1,6 +1,5 @@
 import numpy as np
-from discount_curve_module import DiscountCurveProvider
-from swap_rate_module import SwapRateProvider
+
 class NumberCruncher():
 
     def __init__(self, age, sex, payment, mortality, discount):
