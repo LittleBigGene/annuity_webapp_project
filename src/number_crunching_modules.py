@@ -9,6 +9,7 @@ class NumberCruncher():
         self.sex = sex
         self.payment = payment
         self.mortality = np.asarray(mortality)
+        self.discount = np.asarray(discount)
 
     def update_age(self, age):
         self.age = age
@@ -19,10 +20,10 @@ class NumberCruncher():
     def update_payment(self, payment):
         self.payment = payment
 
-    def actuarial_PV(self, discount_rates):
+    def actuarial_PV(self):
         qx_fromage = self.mortality[self.age:]
         tpx = np.cumprod(1 - qx_fromage)
-        dfs = np.asarray(discount_rates[:len(qx_fromage)])
+        dfs = np.asarray(self.discount[:len(qx_fromage)])
         return 1000 * (tpx @ dfs)
 
     def life_expectancy(self):
