@@ -21,7 +21,10 @@
             </div>
             <div class="form-group row">
                 <label for="sex" class="col-sm-2">Sex</label>
-                <input type="text" name="sex" id="sex"  style="width: 8rem" value={{sex}}>
+                <select name="sex" id="sex" style="width: 8rem">
+                    <option value="m" {% if sex == "m" %} selected="selected"{% endif %}>Male</option>
+                    <option value="f" {% if sex == "f" %} selected="selected"{% endif %}>Female</option>
+                </select>
             </div>
             <div class="form-group row">
                 <label for="payment" class="col-sm-2">Payment Amount</label>
