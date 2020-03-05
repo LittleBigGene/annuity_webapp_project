@@ -1,10 +1,10 @@
 import numpy as np
-
+import pandas as pd
 class DiscountCurveProvider():
 
     def __init__(self, tenors, parcurve, extrap_yrs = None):
         self._tenors = tenors
-        self._parcurve = parcurve
+        self._parcurve = parcurve / 100
         self._extrap_yrs = None
 
     def bootstrap(self):
@@ -35,8 +35,7 @@ class DiscountCurveProvider():
 
         return zcb
 
-
 if __name__ == "__main__":
-    dcp = DiscountCurveProvider()
-
-    print('Discount Curve')
+    swap = pd.read_csv('./src/swaps.csv')
+    dcp = DiscountCurveProvider(tenors = swap['Tenor'], parcurve = swap['Swap'])
+    print(dcp.bootstrap())
