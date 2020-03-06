@@ -8,6 +8,7 @@ class NumberCruncher():
         self.payment = payment
         self.mortality = np.asarray(mortality)
         self.discount = np.asarray(discount)
+        self.max_age = 120
 
     def update_age(self, age):
         self.age = age
@@ -20,7 +21,7 @@ class NumberCruncher():
 
     def actuarial_PV(self):
         qx_fromage = self.mortality[self.age:]
-        tpx = np.cumprod(1 - qx_fromage)
+        tpx = np.cumprod(1 - qx_fromage)[:self.max_age]
         dfs = np.asarray(self.discount[:len(qx_fromage)])
         return self.payment * (tpx @ dfs)
 

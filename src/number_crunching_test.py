@@ -17,6 +17,10 @@ class NumberCruncher_test(unittest.TestCase):
 
         self.assertAlmostEqual(19421.6723720988, self.cruncher.actuarial_PV())
 
+        self.cruncher.update_age(0)
+        
+        self.assertAlmostEqual(40512.072024397, self.cruncher.actuarial_PV())
+
     def test_life_expectation(self):
         self.cruncher.update_age(50)
 
