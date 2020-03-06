@@ -22,7 +22,7 @@ class NumberCruncher():
         qx_fromage = self.mortality[self.age:]
         tpx = np.cumprod(1 - qx_fromage)
         dfs = np.asarray(self.discount[:len(qx_fromage)])
-        return 1000 * (tpx @ dfs)
+        return self.payment * (tpx @ dfs)
 
     def life_expectancy(self):
         qx_fromage = self.mortality[self.age:]
