@@ -3,21 +3,21 @@ import numpy as np
 class NumberCruncher():
 
     def __init__(self, age, sex, payment, mortality, discount):
-        self.age = age
+        self.age = max(min(age,120),0)
         self.sex = sex
-        self.payment = payment
+        self.payment = max(payment,0)
         self.mortality = np.asarray(mortality)
         self.discount = np.asarray(discount)
         self.max_age = 120
 
     def update_age(self, age):
-        self.age = age
+        self.age = max(min(age,120),0)
     
     def update_sex(self, sex):
         self.sex = sex
 
     def update_payment(self, payment):
-        self.payment = payment
+        self.payment = max(payment,0)
 
     def actuarial_PV(self):
         qx_fromage = self.mortality[self.age:]

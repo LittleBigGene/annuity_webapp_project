@@ -11,7 +11,6 @@ app = Flask(__name__)
 def get_params(form_data):
     try:
         age = int(form_data.get("age"))
-        age = max(min(age, 120), 0)
     except:
         age = 65
     try:

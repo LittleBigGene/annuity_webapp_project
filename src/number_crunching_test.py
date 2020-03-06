@@ -23,12 +23,16 @@ class NumberCruncher_test(unittest.TestCase):
 
     def test_life_expectation(self):
         self.cruncher.update_age(50)
-
+        self.cruncher.update_sex('m')
         self.assertAlmostEqual(84.1054262091781, self.cruncher.life_expectancy(), 8)
 
         self.cruncher.update_age(60)
-
+        self.cruncher.update_sex('m')
         self.assertAlmostEqual(85.1599362402086, self.cruncher.life_expectancy(), 8)
+
+        self.cruncher.update_age(0)
+        self.cruncher.update_sex('m')
+        self.assertAlmostEqual(82.4595262663405, self.cruncher.life_expectancy(), 8)
 
 if __name__ == '__main__':
     unittest.main()
